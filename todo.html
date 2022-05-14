@@ -10,28 +10,77 @@
 
 <body>
     <div class="container">
-        <h2>TODO's</h2>
-        <div class="todos">
-        </div>
-        <div class="data">
-            <textarea maxlength="110" class=data--input></textarea>
-            <button class="data--button">GO</button>
+        <div class="header">
+            <a href="#">
+                <img src="edit-solid.svg" />
+            </a>
+            <div>
+                <h4>aderinto</h4>
+                <span>Tasks</span>
+            </div>
+            <input type="color" name="">
         </div>
 
-        <div class="todo">
-            <div class="todo__item">
+        <div class="todo" data-todo-list>
+            <!--   <div class="todo__item" data-todo-item>
                 <button>
-                    <img src="edit-solid.svg"/>
+                    <img src="edit-solid.svg" />
                 </button>
-                <input placeholder="New task...." type="text"></input>
-                
-                <div class="details">
-                    <input type="text">
-                    <input type="date" name="" id="">
-                </div>
+                <input placeholder="New task...." type="text" spellcheck="false"></input>
+
+                 <div class="details">
+                    <div class="details-info--1">
+                        <p>Notes</p>
+                        <textarea maxlength="270" data-todo-item-note></textarea>
+                    </div>
+
+                    <div class="details-info--2">
+                        <div class="details-info--2__date">
+                            <div>
+                                <input type="radio" name="date" id="Today"></input>
+                                <label for="Today">
+                                    Today
+                                </label>
+                            </div>
+                            <div>
+                                <input type="radio" name="date" id="Tommorow"></input>
+                                <label for="Tommorow">
+                                    Tommorow
+                                </label>
+                            </div>
+                            <div>
+                                <input type="date" name="date" id="calender"></input>
+                                <label for="calender">
+                                    Set date
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <button data-todo-item-del>Delete</button>
+                        
+                        
+                    </div>
+
+                </div> 
+
+            </div>
+            -->
+        </div>
+
+        <div class="todo__item" data-todo-item-def>
+            <button>
+                <img src="edit-solid.svg" />
+            </button>
+            <input placeholder="New task...." data-todo value="" spellcheck="false"  onfocus="focusItem()" onchange="focusItem()"></input>
+        </div>
+
+        <div class="history">
+            <button>
+                Completed 13 tasks
+            </button>
+            
+        </div>
+    </div>
 </body>
 
 </html>
-
-
-
