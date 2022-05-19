@@ -1,9 +1,14 @@
 const todosListEl = document.querySelector('[data-todo-list]');
 const defaultItem = document.querySelector('[data-todo-item-def]');
-const todosItem = document.querySelectorAll('[data-todo-item]');
-const deleteItem = document.querySelectorAll('[data-todo-item-del]');
-const todosNote = document.querySelectorAll("[data-todo-item-note]")
 const defaultItemData = document.querySelector("[data-todo]")
+const todosItem = document.querySelectorAll('[data-todo-item]');
+const todosNote = document.querySelectorAll("[data-todo-item-note]")
+var todosItemAfterEL = []
+for (let i = 0; i < todosItem.length; i++) {
+    todosItemAfterEL = window.getComputedStyle(todosItem[i], ":after")
+
+}
+const deleteItem = document.querySelectorAll('[data-todo-item-del]');
 
 
 function updateInput(element) {
@@ -13,13 +18,12 @@ document.addEventListener("keypress", e => {
     let inputValue = defaultItemData.value
     if ((e.keycode === 13 || e.which === 13) && inputValue != "") {
 
-
         const Object = `
             <div class="todo__item" data-todo-item>
                 <button>
                     <img src="edit-solid.svg" />
                 </button>
-                <input placeholder="New task...." type="text" value="${inputValue}" onfocus="${focusItem()}" onchange="${focusItem()}" spellcheck = "false"></input>
+                <input placeholder="New task...." type="text" value="${inputValue}" spellcheck = "false"></input>
 
                  <div class="details">
                     <div class="details-info--1">
@@ -65,6 +69,19 @@ document.addEventListener("keypress", e => {
     }
 })
 
-const focusItem = () => {  
- defaultItem.style.border = "2px solid goldenrod"
+defaultItemData.addEventListener('focus', () => {
+    defaultItem.style.border = "2px solid goldenrod"
+    setTimeout(() => {
+        defaultItem.style.border = "2px solid transparent"
+    }, 3000);
+
+})
+
+
+
+const focusItemTodo = () => {
+    todosItem.forEach(c => {
+        c.style.border = "2px solid goldenrod"
+        console.log("a")
+    })
 }
