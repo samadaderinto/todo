@@ -1,43 +1,33 @@
+"use strict";
 const todosListEl = document.querySelector('[data-todo-list]');
 const defaultItem = document.querySelector('[data-todo-item-def]');
-const defaultItemData = document.querySelector("[data-todo]")
-const todosItem = document.querySelectorAll('[data-todo-item]');
-const todosNote = document.querySelectorAll("[data-todo-item-note]")
-const deleteItem = document.querySelectorAll('[data-todo-item-del]');
-const toggleDetail =  document.querySelector('[btn-todo-item]');
-const detail = document.querySelector('[data-todo-item-detail]');
-
-
-function updateInput(element) {
-    element.value = ""
-
-
-}
-
-
-
-document.addEventListener("keypress", e => {
-    let inputValue = defaultItemData.value
-    if ((e.keycode === 13 || e.which === 13) && inputValue != "") {
-
+const defaultItemData = document.querySelector("[data-todo]");
+const updateInput = (element) => {
+    element.value = "";
+};
+const toggleDetail = (e) => {
+    e.parentElement.parentElement.lastElementChild.classList.toggle("flex");
+};
+const create = (e) => {
+    let inputValue = defaultItemData.value;
+    if ((e.keyCode === 13 || e.which === 13) && inputValue != "") {
         const Object = `
             <div class="todo__item" data-todo-item>
                 <div class="todo__item__main"> 
-                    <button>
-                      <img src="img/close.svg" />
+                    <button onClick="deleteItem(this)" >
+                      <img src="img/done.svg" />
                     </button>
                     <input placeholder="New task...." type="text" value="${inputValue}" spellcheck = "false"></input>
-                    <span btn-todo-item>
+                    <span onClick='toggleDetail(this)' btn-todo-item>
                       <img src="img/expand.svg" />
                     </span>
                 </div>
                
-                <div class="details" data-todo-item-detail>
+                <div class="details flex" data-todo-item-detail>
                     <div class="details-info--1">
                         <p>Notes</p>
                         <textarea maxlength="270" data-todo-item-note></textarea>
                     </div>
-
                     <div class="details-info--2">
                         <div class="details-info--2__date">
                             <div>
@@ -62,36 +52,33 @@ document.addEventListener("keypress", e => {
                         </div>
                         <button data-todo-item-del>Delete</button>
                     </div>
-
                 </div> 
-
             </div>
            
-       `
-        todosListEl.insertAdjacentHTML("afterbegin", Object)
-        updateInput(defaultItemData)
-        console.log(toggleDetail)
-
+       `;
+        todosListEl.insertAdjacentHTML("afterbegin", Object);
+        updateInput(defaultItemData);
     }
-})
-
-if (toggleDetail != null) {
-    
-toggleDetail.addEventListener("click", () => {
-    console.log(toggleDetail)
-    detail.forEach(detail => {
-        detail.classList.toggle(".detailsVissble")
-    })
-} )
-}
-
-
-
-
+};
+const deleteItem = (e) => {
+    e.parentElement.parentElement.remove();
+};
+document.addEventListener("keypress", e => {
+    create(e);
+});
+//         todosItem = document.querySelectorAll('[data-todo-item]');
+//         todosNote = document.querySelectorAll("[data-todo-item-note]")
+//         deleteItem = document.querySelectorAll('[data-todo-item-del]');
+//         toggleDetail = document.querySelectorAll('[btn-todo-item]')
+//         detail = document.querySelectorAll('[data-todo-item-detail]');
+// toggleDetail.forEach((curr: Node) => {
+//         curr.addEventListener("click", () => {
+//         console.log("a")
+//     })
+// })
 defaultItemData.addEventListener('focus', () => {
-    defaultItem.style.border = "2px solid goldenrod"
+    defaultItem.style.border = "2px solid goldenrod";
     setTimeout(() => {
-        defaultItem.style.border = "2px solid transparent"
+        defaultItem.style.border = "2px solid transparent";
     }, 3000);
-
-})
+});
