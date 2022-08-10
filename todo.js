@@ -3,29 +3,36 @@ const defaultItem = document.querySelector('[data-todo-item-def]');
 const defaultItemData = document.querySelector("[data-todo]")
 const todosItem = document.querySelectorAll('[data-todo-item]');
 const todosNote = document.querySelectorAll("[data-todo-item-note]")
-var todosItemAfterEL = []
-for (let i = 0; i < todosItem.length; i++) {
-    todosItemAfterEL = window.getComputedStyle(todosItem[i], ":after")
-
-}
 const deleteItem = document.querySelectorAll('[data-todo-item-del]');
+const toggleDetail =  document.querySelector('[btn-todo-item]');
+const detail = document.querySelector('[data-todo-item-detail]');
 
 
 function updateInput(element) {
     element.value = ""
+
+
 }
+
+
+
 document.addEventListener("keypress", e => {
     let inputValue = defaultItemData.value
     if ((e.keycode === 13 || e.which === 13) && inputValue != "") {
 
         const Object = `
             <div class="todo__item" data-todo-item>
-                <button>
-                    <img src="edit-solid.svg" />
-                </button>
-                <input placeholder="New task...." type="text" value="${inputValue}" spellcheck = "false"></input>
-
-                 <div class="details">
+                <div class="todo__item__main"> 
+                    <button>
+                      <img src="img/close.svg" />
+                    </button>
+                    <input placeholder="New task...." type="text" value="${inputValue}" spellcheck = "false"></input>
+                    <span btn-todo-item>
+                      <img src="img/expand.svg" />
+                    </span>
+                </div>
+               
+                <div class="details" data-todo-item-detail>
                     <div class="details-info--1">
                         <p>Notes</p>
                         <textarea maxlength="270" data-todo-item-note></textarea>
@@ -54,8 +61,6 @@ document.addEventListener("keypress", e => {
                             
                         </div>
                         <button data-todo-item-del>Delete</button>
-                        
-                        
                     </div>
 
                 </div> 
@@ -65,9 +70,23 @@ document.addEventListener("keypress", e => {
        `
         todosListEl.insertAdjacentHTML("afterbegin", Object)
         updateInput(defaultItemData)
+        console.log(toggleDetail)
 
     }
 })
+
+if (toggleDetail != null) {
+    
+toggleDetail.addEventListener("click", () => {
+    console.log(toggleDetail)
+    detail.forEach(detail => {
+        detail.classList.toggle(".detailsVissble")
+    })
+} )
+}
+
+
+
 
 defaultItemData.addEventListener('focus', () => {
     defaultItem.style.border = "2px solid goldenrod"
@@ -76,12 +95,3 @@ defaultItemData.addEventListener('focus', () => {
     }, 3000);
 
 })
-
-
-
-const focusItemTodo = () => {
-    todosItem.forEach(c => {
-        c.style.border = "2px solid goldenrod"
-        console.log("a")
-    })
-}
